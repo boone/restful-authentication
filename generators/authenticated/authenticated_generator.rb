@@ -111,10 +111,10 @@ class AuthenticatedGenerator < Rails::Generator::NamedBase
                             "#{model_controller_file_name}_controller.rb")
 
       m.template 'authenticated_system.rb',
-                  File.join('lib', 'authenticated_system.rb')
+                  File.join('lib', "authenticated_#{file_name}_system.rb")
 
       m.template 'authenticated_test_helper.rb',
-                  File.join('lib', 'authenticated_test_helper.rb')
+                  File.join('lib', "authenticated_#{file_name}_test_helper.rb")
 
       if @rspec
         m.template 'functional_spec.rb',

@@ -1,4 +1,4 @@
-module AuthenticatedSystem
+module Authenticated<%= class_name %>System
   protected
     # Returns true or false if the <%= file_name %> is logged in.
     # Preloads @current_<%= file_name %> with the <%= file_name %> model if they're logged in.

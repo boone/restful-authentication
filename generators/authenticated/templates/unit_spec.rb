@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead.
+# Be sure to include Authenticated<%= class_name %>TestHelper in spec/spec_helper.rb instead.
 # Then, you can remove it from this and the functional test.
-include AuthenticatedTestHelper
+include Authenticated<%= class_name %>TestHelper
 
 describe <%= class_name %> do
   fixtures :<%= table_name %>

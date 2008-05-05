@@ -62,7 +62,7 @@ class AuthenticatedGenerator < Rails::Generator::NamedBase
       m.class_collisions model_controller_class_path, "#{model_controller_class_name}Controller", # Model Controller
                                                       "#{model_controller_class_name}Helper"
       m.class_collisions class_path,                  "#{class_name}", "#{class_name}Mailer", "#{class_name}MailerTest", "#{class_name}Observer"
-      m.class_collisions [], 'AuthenticatedSystem', 'AuthenticatedTestHelper'
+      m.class_collisions [], "Authenticated#{class_name}System", "Authenticated#{class_name}TestHelper"
 
       # Controller, helper, views, and test directories.
       m.directory File.join('app/models', class_path)

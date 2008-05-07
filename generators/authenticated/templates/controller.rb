@@ -12,7 +12,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if logged_in?
       if params[:remember_me] == "1"
         current_<%= file_name %>.remember_me unless current_<%= file_name %>.remember_token?
-        cookies[:auth_token] = { :value => self.current_<%= file_name %>.remember_token , :expires => self.current_<%= file_name %>.remember_token_expires_at }
+        cookies[:auth_<%= file_name %>_token] = { :value => self.current_<%= file_name %>.remember_token , :expires => self.current_<%= file_name %>.remember_token_expires_at }
       end
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
@@ -23,7 +23,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def destroy
     self.current_<%= file_name %>.forget_me if logged_in?
-    cookies.delete :auth_token
+    cookies.delete :auth_<%= file_name %>_token
     reset_session
     flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')

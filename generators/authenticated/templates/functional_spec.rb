@@ -28,23 +28,23 @@ describe <%= controller_class_name %>Controller do
 
   it 'remembers me' do
     post :create, :login => 'quentin', :password => 'test', :remember_me => "1"
-    response.cookies["auth_token"].should_not be_nil
+    response.cookies["auth_<%= file_name %>_token"].should_not be_nil
   end
   
   it 'does not remember me' do
     post :create, :login => 'quentin', :password => 'test', :remember_me => "0"
-    response.cookies["auth_token"].should be_nil
+    response.cookies["auth_<%= file_name %>_token"].should be_nil
   end
 
   it 'deletes token on logout' do
     login_as :quentin
     get :destroy
-    response.cookies["auth_token"].should == []
+    response.cookies["auth_<%= file_name %>_token"].should == []
   end
 
   it 'logs in with cookie' do
     <%= table_name %>(:quentin).remember_me
-    request.cookies["auth_token"] = cookie_for(:quentin)
+    request.cookies["auth_<%= file_name %>_token"] = cookie_for(:quentin)
     get :new
     controller.send(:logged_in?).should be_true
   end
@@ -52,20 +52,20 @@ describe <%= controller_class_name %>Controller do
   it 'fails expired cookie login' do
     <%= table_name %>(:quentin).remember_me
     <%= table_name %>(:quentin).update_attribute :remember_token_expires_at, 5.minutes.ago
-    request.cookies["auth_token"] = cookie_for(:quentin)
+    request.cookies["auth_<%= file_name %>_token"] = cookie_for(:quentin)
     get :new
     controller.send(:logged_in?).should_not be_true
   end
   
   it 'fails cookie login' do
     <%= table_name %>(:quentin).remember_me
-    request.cookies["auth_token"] = auth_token('invalid_auth_token')
+    request.cookies["auth_<%= file_name %>_token"] = auth_token('invalid_auth_token')
     get :new
     controller.send(:logged_in?).should_not be_true
   end
 
   def auth_token(token)
-    CGI::Cookie.new('name' => 'auth_token', 'value' => token)
+    CGI::Cookie.new('name' => 'auth_<%= file_name %>_token', 'value' => token)
   end
     
   def cookie_for(<%= file_name %>)

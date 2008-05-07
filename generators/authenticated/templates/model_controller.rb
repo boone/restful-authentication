@@ -12,7 +12,7 @@ class <%= model_controller_class_name %>Controller < ApplicationController
   end
 
   def create
-    cookies.delete :auth_token
+    cookies.delete :auth_<%= file_name %>_token
     # protects against session fixation attacks, wreaks havoc with 
     # request forgery protection.
     # uncomment at your own risk

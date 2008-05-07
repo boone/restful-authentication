@@ -106,9 +106,9 @@ module Authenticated<%= class_name %>System
 
     # Called from #current_<%= file_name %>.  Finaly, attempt to login by an expiring token in the cookie.
     def login_from_cookie
-      <%= file_name %> = cookies[:auth_token] && <%= class_name %>.find_by_remember_token(cookies[:auth_token])
+      <%= file_name %> = cookies[:auth_<%= file_name %>_token] && <%= class_name %>.find_by_remember_token(cookies[:auth_<%= file_name %>_token])
       if <%= file_name %> && <%= file_name %>.remember_token?
-        cookies[:auth_token] = { :value => <%= file_name %>.remember_token, :expires => <%= file_name %>.remember_token_expires_at }
+        cookies[:auth_<%= file_name %>_token] = { :value => <%= file_name %>.remember_token, :expires => <%= file_name %>.remember_token_expires_at }
         self.current_<%= file_name %> = <%= file_name %>
       end
     end

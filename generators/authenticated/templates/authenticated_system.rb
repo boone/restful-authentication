@@ -76,14 +76,14 @@ module Authenticated<%= class_name %>System
     #
     # We can return to this location by calling #redirect_back_or_default.
     def store_location
-      session[:return_to] = request.request_uri
+      session[:<%= file_name %>_return_to] = request.request_uri
     end
 
     # Redirect to the URI stored by the most recent store_location call or
     # to the passed default.
     def redirect_back_or_default(default)
-      redirect_to(session[:return_to] || default)
-      session[:return_to] = nil
+      redirect_to(session[:<%= file_name %>_return_to] || default)
+      session[:<%= file_name %>_return_to] = nil
     end
 
     # Inclusion hook to make #current_<%= file_name %> and #logged_in?
